@@ -36,10 +36,10 @@ jobs:
           dotnet-version: '8.0'
 
       - name: restore
-        run: dotnet restore './KartowkaMarkowkaHub.Test/KartowkaMarkowkaHub.Test.csproj'
+        run: dotnet restore './KartowkaMarkowkaHub.Web/KartowkaMarkowkaHub.Web.csproj'
 
       - name: run tests
-        run: dotnet test './KartowkaMarkowkaHub.Test/KartowkaMarkowkaHub.Test.csproj' --logger "junit;LogFileName=test-results.xml"
+        run: dotnet test './KartowkaMarkowkaHub.Web/KartowkaMarkowkaHub.Web.csproj' --logger "junit;LogFileName=test-results.xml"
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
