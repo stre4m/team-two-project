@@ -56,4 +56,4 @@ jobs:
     needs: test
     steps:
       - name: echo test status
-        run: echo "Test results available at: ${{ steps.upload.outputs.artifact-path }}"
+        run: echo "Test results available at: ${{ steps.upload.outputs['artifact-path'] }}"
