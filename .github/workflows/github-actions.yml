@@ -35,10 +35,10 @@ jobs:
           dotnet-version: '8.0'
 
       - name: restore
-        run: dotnet restore './KartowkaMarkowkaHub.Web/KartowkaMarkowkaHub.Web.csproj'
+        run: dotnet restore './KartowkaMarkowkaHub.Test/KartowkaMarkowkaHub.Test.csproj'
 
       - name: run tests
-        run: dotnet test './KartowkaMarkowkaHub.Web/KartowkaMarkowkaHub.Web.csproj' --logger "trx;logfilename=test-results.trx" --verbosity detailed
+        run: dotnet test './KartowkaMarkowkaHub.Test/KartowkaMarkowkaHub.Test.csproj' --logger "trx;logfilename=test-results.trx" --verbosity detailed
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
@@ -51,4 +51,4 @@ jobs:
     needs: test
     steps:
       - name: echo test status
-        run: echo "Test results available at: ${{ steps.upload.outputs.artifact-path }}"
+        run: echo "Test results are available. You can download them from the 'Artifacts' section of the workflow run."
