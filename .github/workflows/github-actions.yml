@@ -46,9 +46,14 @@ jobs:
           name: test-results
           path: test-results.trx
 
+      - name: Publish test results to GitHub
+        uses: marvinpinto/action-automatic-test-reporter@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
   notify:
     runs-on: ubuntu-latest
     needs: test
     steps:
       - name: echo test status
-        run: echo "Test results are available. You can download them from the 'Artifacts' section of the workflow run."
+        run: echo "Test results available at: ${{ steps.upload.outputs.artifact-path }}"
