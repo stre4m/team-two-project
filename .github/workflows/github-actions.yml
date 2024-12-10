@@ -1,9 +1,10 @@
 name: GitHub Actions Demo
-run-name: ${{ github.actor }} is start GitHub Actions 🚀
-on: 
+run-name: ${{ github.actor }} is starting GitHub Actions 🚀
+on:
   push:
-    branches: 
+    branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,22 +39,20 @@ jobs:
         run: dotnet restore './KartowkaMarkowkaHub.Test/KartowkaMarkowkaHub.Test.csproj'
 
       - name: run tests
-        run: dotnet test './KartowkaMarkowkaHub.Test/KartowkaMarkowkaHub.Test.csproj' --logger "trx;logfilename=test-results.trx"
+        run: dotnet test './KartowkaMarkowkaHub.Test/KartowkaMarkowkaHub.Test.csproj' --logger "junit;LogFileName=test-results.xml"
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: test-results.trx
-
-      - name: Publish test results to GitHub
-        uses: marvinpinto/action-automatic-test-reporter@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          path: test-results.xml
 
   notify:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - name: echo test status
-        run: echo "Test results available at: ${{ steps.upload.outputs.artifact-path }}"
+      - name: Display Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Result
+          path: test-results.xml
